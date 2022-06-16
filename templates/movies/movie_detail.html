@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  Detail
+{% endblock %}
+
+
+{% block content %}
+
+<div class="ml-8">
+  <div class="mb-4">
+    <sapn class="text-4xl font-bold font-serif text-green-500 ml-4">{{movie.title}}</sapn>
+  </div>
+
+  <ul class="list-disc ml-8 mb-8">
+    <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Rating : </span>{{movie.rating}}</li>
+    <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Year : </span>{{movie.year}}</li>
+    <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Category : </span>{{movie.category}}</li>
+    <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Director : </span>{{movie.director}}</li>
+    <li>
+      <span class="text-lg font-semibold text-blue-700">Cast : </span>
+    {% if movie.cast is None %}
+      None
+    {% else %}
+    {{movie.cast}}
+    {% endif %}
+    </li>
+  </ul>
+
+  <button class="text-center ml-2 mb-4 rounded-md py-2 px-2 font-light text-sm w-1/8 bg-green-500 text-white mt-1">
+    <span class="text-white-600">
+      <a href="{% url "movies:update" movie.pk %}" class="w-full">Edit Movie</a>
+    </span>
+  </button>
+<div>
+{% endblock content %}

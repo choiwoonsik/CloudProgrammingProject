@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  Detail
+{% endblock %}
+
+
+{% block content %}
+
+<div class="ml-8">
+  <div class="mb-4">
+    <sapn class="text-4xl font-bold font-serif text-green-500 ml-4">{{book.title}}</sapn>
+  </div>
+
+  <ul class="list-disc ml-8 mb-8">
+    <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Rating : </span>{{book.rating}}</li>
+    <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Year : </span>{{book.year}}</li>
+    <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Category : </span>{{book.category}}</li>
+    <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Director : </span>{{book.writer}}</li>
+  </ul>
+
+  <button class="text-center ml-2 mb-4 rounded-md py-2 px-2 w-1/8 font-light text-sm  bg-green-500 text-white mt-1">
+    <span class="text-white-600">
+      <a href="{% url "books:update" book.pk %}" class="w-full">Edit Book</a>
+    </span>
+  </button>
+<div>
+{% endblock content %}
