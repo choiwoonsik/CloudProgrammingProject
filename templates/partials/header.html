@@ -1,0 +1,9 @@
+<ul class="flex items-center text-sm font-medium h-full">
+  {% if user.is_authenticated %}
+    <li class="mr-5 text-xl text-green-600 "><a href="{% url 'users:profile' user.pk %}">Profile</a></li>
+    <li class="mr-5 text-xl text-green-600"><a href="{% url 'users:logout' %}">Logout</a></li>
+  {% else %}
+    <li class="mr-5 text-xl text-green-600"><a href="{% url 'users:login' %}">Login</a></li>
+    <li class="mr-5 text-xl text-green-600"><a href="{% url 'users:signup' %}">Sign up</a></li>
+  {% endif %}
+</ul>
