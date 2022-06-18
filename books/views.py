@@ -1,13 +1,15 @@
-from django.views.generic import ListView, DetailView, UpdateView, FormView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, reverse
+from django.views.generic import ListView, DetailView, UpdateView, FormView
+
 from books.models import Book
 from . import forms
 
 
 class BooksView(ListView):
     model = Book
-    paginate_by = 8
-    paginate_orphans = 4
+    paginate_by = 4
     ordering = "-created_at"
     context_object_name = "books"
 
@@ -22,17 +24,23 @@ class BookDetail(DetailView):
     context_object_name = 'book'
 
 
-class CreateBook(FormView):
+class CreateBook(LoginRequiredMixin, FormView):
     form_class = forms.CreateBookForm
     template_name = "books/book_create.html"
 
     def form_valid(self, form):
-        book = form.save()
-        book.save()
-        return redirect(reverse("books:book", kwargs={'pk': book.pk}))
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            form.instance.author = current_user
+            book = form.save()
+            book.save()
+            return redirect(reverse("books:book", kwargs={'pk': book.pk}))
+        else:
+            return redirect('/')
 
 
-class EditBook(UpdateView):
+class EditBook(LoginRequiredMixin, UpdateView):
+
     model = Book
     template_name = 'books/book_edit.html'
     fields = (
@@ -47,3 +55,9 @@ class EditBook(UpdateView):
     def get_object(self, queryset=None):
         book = super().get_object(queryset=queryset)
         return book
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and self.request.user.email == self.get_object().author:
+            return super(EditBook, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied

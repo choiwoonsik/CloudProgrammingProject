@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.shortcuts import redirect, reverse
 from movies.models import Movie
@@ -6,8 +8,7 @@ from . import forms
 
 class MoviesView(ListView):
     model = Movie
-    paginate_by = 8
-    paginate_orphans = 4
+    paginate_by = 4
     ordering = "-created_at"
     context_object_name = "movies"
 
@@ -22,17 +23,22 @@ class MovieDetail(DetailView):
     context_object_name = 'movie'
 
 
-class CreateMovie(CreateView):
+class CreateMovie(LoginRequiredMixin, CreateView):
     form_class = forms.CreateMovieForm
     template_name = "movies/movie_create.html"
 
     def form_valid(self, form):
-        movie = form.save()
-        movie.save()
-        return redirect(reverse("movies:movie", kwargs={'pk': movie.pk}))
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            form.instance.author = current_user
+            movie = form.save()
+            movie.save()
+            return redirect(reverse("movies:movie", kwargs={'pk': movie.pk}))
+        else:
+            return redirect('/')
 
 
-class EditMovie(UpdateView):
+class EditMovie(LoginRequiredMixin, UpdateView):
     model = Movie
     template_name = "movies/movie_edit.html"
     fields = (
@@ -48,3 +54,9 @@ class EditMovie(UpdateView):
     def get_object(self, queryset=None):
         movie = super().get_object(queryset=queryset)
         return movie
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and self.request.user.email == self.get_object().author:
+            return super(EditMovie, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied

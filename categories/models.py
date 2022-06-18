@@ -3,7 +3,7 @@ from core.models import CoreModel
 
 
 class Category(CoreModel):
-    KIND_BOOK = "book"
+    KIND_BOOK = "books"
     KIND_MOVIE = "movie"
     KIND_BOTH = "both"
 
