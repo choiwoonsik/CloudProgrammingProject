@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-g2b4w&+i1-+s_2(i0dg@(86iik@xjoww756v$0$9n@)b_-53#j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['http://43.200.61.4/', ".ap-northeast-2.compute.amazonaws.com"]
 
 # Application definition
 
@@ -97,8 +98,18 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 # }
 
 LOCAL_SQLITE = 'sqlite:///' + os.path.abspath(os.path.join(BASE_DIR, 'db.sqlite3'))
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(default=LOCAL_SQLITE)
+DATABASES = {
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'database-1',
+        'USER': 'admin',
+        'PASSWORD': 'cloudprogramming123!',
+        'HOST': 'database-1.cqrgd4iid9qf.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '3306',
+    }
+}
+timezone = 'Asia/Seoul'
+# DATABASES['default'] = dj_database_url.config(default=LOCAL_SQLITE)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
