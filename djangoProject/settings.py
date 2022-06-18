@@ -14,6 +14,9 @@ import dj_database_url
 import os
 from django.urls import reverse_lazy
 from pathlib import Path
+import pymysql
+
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -99,15 +102,19 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 
 LOCAL_SQLITE = 'sqlite:///' + os.path.abspath(os.path.join(BASE_DIR, 'db.sqlite3'))
 DATABASES = {
-    'default' : {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'database-1',
+        'NAME': 'djangodb',
         'USER': 'admin',
-        'PASSWORD': 'cloudprogramming123!',
-        'HOST': 'database-1.cqrgd4iid9qf.ap-northeast-2.rds.amazonaws.com',
+        'PASSWORD': 'password123!',
+        'HOST': 'djangodb.cqrgd4iid9qf.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
+
 timezone = 'Asia/Seoul'
 # DATABASES['default'] = dj_database_url.config(default=LOCAL_SQLITE)
 
