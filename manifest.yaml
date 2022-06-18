@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: woonsikstore
+  - name: woonsikstore2
     buildpack: python_buildpack
     memory: 1024M
     instances: 1
