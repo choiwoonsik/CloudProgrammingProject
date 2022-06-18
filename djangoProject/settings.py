@@ -16,11 +16,7 @@ from django.urls import reverse_lazy
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-<<<<<<< HEAD
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-=======
-BASE_DIR = Path(__file__).resolve().parent.parent
->>>>>>> 8efe9d0c98b8b605e732f1cc015893c96e4bde72
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -31,34 +27,12 @@ SECRET_KEY = 'django-insecure-g2b4w&+i1-+s_2(i0dg@(86iik@xjoww756v$0$9n@)b_-53#j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 THIRD_PARTY_APPS = [
     "django_seed",
-=======
-ALLOWED_HOSTS = []
-
-# Application definition
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'final_project.apps.FinalProjectConfig',
-
-    # my class
-    "core.apps.CoreConfig",
-    "books.apps.BooksConfig",
-    "categories.apps.CategoriesConfig",
-    "movies.apps.MoviesConfig",
-    "people.apps.PeopleConfig",
->>>>>>> 8efe9d0c98b8b605e732f1cc015893c96e4bde72
 ]
 
 INSTALLED_APPS = [
@@ -122,13 +96,10 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 #     }
 # }
 
-<<<<<<< HEAD
 LOCAL_SQLITE = 'sqlite:///' + os.path.abspath(os.path.join(BASE_DIR, 'db.sqlite3'))
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(default=LOCAL_SQLITE)
 
-=======
->>>>>>> 8efe9d0c98b8b605e732f1cc015893c96e4bde72
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -158,11 +129,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-<<<<<<< HEAD
 USE_TZ = False
-=======
-USE_TZ = True
->>>>>>> 8efe9d0c98b8b605e732f1cc015893c96e4bde72
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

@@ -13,8 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('book/', include('book.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +25,5 @@ urlpatterns = [
     path("books/", include("books.urls", namespace="books")),
     path("genres/", include("categories.urls", namespace="genres")),
     path("users/", include("users.urls", namespace="users")),
+    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico')),
 ]
