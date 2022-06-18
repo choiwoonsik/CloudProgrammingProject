@@ -1,7 +1,7 @@
 ---
 applications:
-  - name: woonsikstore2
+  - name: woonsikstore
     buildpack: python_buildpack
     memory: 1024M
     instances: 1
-    command: python manage.py runserver 8080
+    command: waitress-serve --port=8000 djangoProejct.wsgi:application
