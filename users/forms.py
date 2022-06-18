@@ -1,17 +1,18 @@
 from django import forms
 from users.models import User
 
+
 class LoginForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={"placeholder": "Email"}))
     password = forms.CharField(
-      widget=forms.PasswordInput(attrs={"placeholder": "Password"})
+        widget=forms.PasswordInput(attrs={"placeholder": "Password"})
     )
 
     def clean(self):
 
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
-        
+
         try:
             user = User.objects.get(email=email)
             if user.check_password(password):
@@ -25,18 +26,17 @@ class LoginForm(forms.Form):
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "email")
+        fields = ("name", "email")
         widgets = {
-          "first_name": forms.TextInput(attrs={"placeholder": "First Name"}),
-          "last_name": forms.TextInput(attrs={"placeholder": "Last Name"}),
-          "email": forms.EmailInput(attrs={"placeholder": "Email"}),
+            "name": forms.TextInput(attrs={"placeholder": "Name"}),
+            "email": forms.EmailInput(attrs={"placeholder": "Email"}),
         }
 
     password = forms.CharField(
-       widget=forms.PasswordInput(attrs={"placeholder": "Password"})
+        widget=forms.PasswordInput(attrs={"placeholder": "Password"})
     )
     password1 = forms.CharField(
-      widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"})
+        widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"})
     )
 
     def clean_password1(self):
@@ -49,8 +49,10 @@ class SignUpForm(forms.ModelForm):
 
     def save(self, *args, **kwargs):
         user = super().save(commit=False)
+        name = self.cleaned_data.get("name")
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
+        user.name = name
         user.username = email
         user.set_password(password)
         user.save()

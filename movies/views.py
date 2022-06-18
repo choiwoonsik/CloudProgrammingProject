@@ -5,7 +5,6 @@ from . import forms
 
 
 class MoviesView(ListView):
-
     model = Movie
     paginate_by = 8
     paginate_orphans = 4
@@ -24,13 +23,13 @@ class MovieDetail(DetailView):
 
 
 class CreateMovie(CreateView):
-  form_class = forms.CreateMovieForm
-  template_name = "movies/movie_create.html"
+    form_class = forms.CreateMovieForm
+    template_name = "movies/movie_create.html"
 
-  def form_valid(self, form):
-    movie = form.save()
-    movie.save()
-    return redirect(reverse("movies:movie", kwargs={'pk': movie.pk}))
+    def form_valid(self, form):
+        movie = form.save()
+        movie.save()
+        return redirect(reverse("movies:movie", kwargs={'pk': movie.pk}))
 
 
 class EditMovie(UpdateView):
@@ -47,7 +46,5 @@ class EditMovie(UpdateView):
     )
 
     def get_object(self, queryset=None):
-      movie = super().get_object(queryset=queryset)
-      # if book.host.pk != self.request.user.pk:
-      #     raise Http404()
-      return movie
+        movie = super().get_object(queryset=queryset)
+        return movie

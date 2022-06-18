@@ -8,9 +8,9 @@ class Book(CoreModel):
     year = models.IntegerField()
     cover_image = models.ImageField(null=True, blank=True)
     rating = models.FloatField()
+    writer = models.CharField(max_length=30)
     category = models.ForeignKey(
         "categories.Category", on_delete=models.CASCADE, related_name="books")
-    writer = models.CharField(max_length=30)
 
     def __str__(self):
         return self.title
