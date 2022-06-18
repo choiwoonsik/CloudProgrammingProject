@@ -133,6 +133,7 @@ dmypy.json
 
 # Django files
 migrations/
+*/migrations/
 
 #User contents
 _media/
