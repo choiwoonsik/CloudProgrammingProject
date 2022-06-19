@@ -74,7 +74,6 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    '43.200.61.4',
     'http://43.200.61.4/',
 )
 
