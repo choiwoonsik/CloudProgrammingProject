@@ -8,8 +8,13 @@
                 <span class="mr-3">카테고리 : {{ book.category }}</span>
                 <span class="mr-3">출판연도 : {{ book.year }}</span>
                 <span class="">
-        <i class="fas fa-star text-red-500 text-xs mr-1"></i>{{ book.rating }}
-      </span>
+                    <i class="fas fa-star text-red-500 text-xs mr-1"></i>{{ book.rating }}
+                </span>
+            </div>
+            <div class="mb-4">
+                {% if book.cover_image %}
+                    <img width="80" class="img-fluid rounded" src="{{ book.cover_image.url }}" alt="">
+                {% endif %}
             </div>
         </div>
     {% endfor %}

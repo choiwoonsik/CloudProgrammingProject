@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.views.generic import RedirectView
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +27,7 @@ urlpatterns = [
     path("books/", include("books.urls", namespace="books")),
     path("genres/", include("categories.urls", namespace="genres")),
     path("users/", include("users.urls", namespace="users")),
-    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico')),
+    url(r'^favicon\.ico$', RedirectView.as_view(url='/media/static/favicon.ico')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

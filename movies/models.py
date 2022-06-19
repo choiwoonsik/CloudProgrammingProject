@@ -6,7 +6,7 @@ from core.models import CoreModel
 class Movie(CoreModel):
     title = models.CharField(max_length=120)
     year = models.IntegerField()
-    cover_image = models.ImageField(null=True, blank=True)
+    cover_image = models.ImageField(upload_to='movie/images/%Y/%m/%d/', null=True, blank=True)
     rating = models.FloatField()
     category = models.ForeignKey("categories.Category", on_delete=models.CASCADE, related_name="movies")
     director = models.CharField(max_length=30)

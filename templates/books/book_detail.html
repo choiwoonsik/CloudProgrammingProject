@@ -17,6 +17,14 @@
     <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Year : </span>{{book.year}}</li>
     <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Category : </span>{{book.category}}</li>
     <li class="mb-2"><span class="text-lg font-semibold text-blue-700">Director : </span>{{book.writer}}</li>
+    <li>
+      <span class="text-lg font-semibold text-blue-700">Cover Image : </span>
+      {% if book.cover_image %}
+          <img class="img-fluid rounded" src="{{ book.cover_image.url }}" alt="">
+      {% else %}
+          None
+      {% endif %}
+    </li>
   </ul>
 
   <button class="text-center ml-2 mb-4 rounded-md py-2 px-2 w-1/8 font-light text-sm  bg-green-500 text-white mt-1">
