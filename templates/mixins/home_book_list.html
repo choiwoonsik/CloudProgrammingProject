@@ -13,7 +13,7 @@
             </div>
             <div class="mb-4">
                 {% if book.cover_image %}
-                    <img width="80" class="img-fluid rounded" src="{{ book.cover_image.url }}" alt="">
+                    <img width="80" class="img-fluid rounded" src="{{ book.get_image_url }}" alt="">
                 {% endif %}
             </div>
         </div>
