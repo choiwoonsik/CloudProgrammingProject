@@ -74,7 +74,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'http://43.200.61.4/',
+    'http://43.200.61.4',
 )
 
 ROOT_URLCONF = 'djangoProject.urls'
