@@ -1,8 +1,12 @@
+import encodings
+
 from django.urls import reverse
 from django.db import models
 from core.models import CoreModel
 import urllib.parse
 
+
+# -*- coding: utf-8 -*-
 
 class Book(CoreModel):
     title = models.CharField(max_length=120)
@@ -17,7 +21,7 @@ class Book(CoreModel):
         return self.title
 
     def get_image_url(self):
-        return urllib.parse.unquote(self.cover_image.url)
+        return self.cover_image.url
 
     def get_absolute_url(self):
         return reverse("books:book", kwargs={"pk": self.pk})
