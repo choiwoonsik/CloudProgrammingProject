@@ -73,9 +73,10 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'http://43.200.61.4',
-)
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = (
+#     'http://43.200.61.4',
+# )
 
 ROOT_URLCONF = 'djangoProject.urls'
 
